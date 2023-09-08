@@ -2217,6 +2217,7 @@ const OFFER_ITEMS = [
             el.MainImage.url_570xN &&
             el.title &&
             el.currency_code &&
+            el.price &&
             el.quantity
     )
     .map((el: { [key: string]: any }) => {
@@ -2228,6 +2229,7 @@ const OFFER_ITEMS = [
                     key === 'MainImage' ||
                     key === 'title' ||
                     key === 'currency_code' ||
+                    key === 'price' ||
                     key === 'quantity'
             )
             .reduce((result: { [key: string]: any }, key: string) => {

@@ -15,7 +15,6 @@ type OfferListProps = {
 };
 
 const Listing: FC<OfferListProps> = ({ offers }) => {
-    console.log(offers);
     return (
         <div className="item-list">
             {offers.map((offer) => (
@@ -26,10 +25,28 @@ const Listing: FC<OfferListProps> = ({ offers }) => {
                         </a>
                     </div>
                     <div className="item-details">
-                        <p className="item-title">{offer.title}</p>
-                        <p className="item-price">${offer.price}</p>
-                        <p className="item-quantity level-medium">
-                            {offer.quantity}
+                        <p className="item-title">
+                            {offer.title.length > 50
+                                ? offer.title.substring(0, 50) + '...'
+                                : offer.title}
+                        </p>
+                        <p className="item-price">
+                            {offer.currency_code === 'USD'
+                                ? '$' + ' ' + offer.price
+                                : offer.currency_code === 'USD'
+                                ? '€' + ' ' + offer.price
+                                : offer.currency_code + ' ' + offer.price}
+                        </p>
+                        <p
+                            className={`item-quantity ${
+                                offer.quantity <= 10
+                                    ? 'level-low'
+                                    : offer.quantity <= 20
+                                    ? 'level-medium'
+                                    : 'level-high'
+                            }`}
+                        >
+                            {offer.quantity} left
                         </p>
                     </div>
                 </div>
