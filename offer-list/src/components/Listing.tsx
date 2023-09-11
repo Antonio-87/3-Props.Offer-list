@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import RenderPrice from './RenderPrice';
+import RenderQuantity from './RenderQuantity';
 
 export type OfferItem = {
     listing_id: number;
@@ -30,24 +32,11 @@ const Listing: FC<OfferListProps> = ({ offers }) => {
                                 ? offer.title.substring(0, 50) + '...'
                                 : offer.title}
                         </p>
-                        <p className="item-price">
-                            {offer.currency_code === 'USD'
-                                ? '$' + ' ' + offer.price
-                                : offer.currency_code === 'USD'
-                                ? '€' + ' ' + offer.price
-                                : offer.currency_code + ' ' + offer.price}
-                        </p>
-                        <p
-                            className={`item-quantity ${
-                                offer.quantity <= 10
-                                    ? 'level-low'
-                                    : offer.quantity <= 20
-                                    ? 'level-medium'
-                                    : 'level-high'
-                            }`}
-                        >
-                            {offer.quantity} left
-                        </p>
+                        <RenderPrice
+                            currency_code={offer.currency_code}
+                            price={offer.price}
+                        />
+                        <RenderQuantity quantity={offer.quantity} />
                     </div>
                 </div>
             ))}
